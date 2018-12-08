@@ -32,5 +32,5 @@ def login():
 import os
 def tryWhitelist(uname):
     uname = ''.join(c for c in uname if c.isalnum() or c == '-' or c == '_')
-    cmd = f"screen -r minecraft -p 0 -X stuff \"whitelist add {uname} $(printf '\r')'\""
+    cmd = f"screen -r minecraft -p 0 -X stuff \"whitelist add {uname} $(printf '\r')\""
     result = os.system(cmd)
