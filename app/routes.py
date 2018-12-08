@@ -18,19 +18,23 @@ def try_register():
     
 def registration(uname=None, isAdded=False):
     regForm = RegistrationForm()
-    print(isAdded, uname)
     return render_template('registration.html', title='Registration', form=regForm, whitelisted_username=uname, valid=isAdded)
 
 @app.route('/admin')
 def admin():
-    return "Denied"
+    return render_template('admin.html')
 
 @app.route('/login')
 def login():
     return redirect('/')
 
-import os
 def tryWhitelist(uname):
     uname = ''.join(c for c in uname if c.isalnum() or c == '-' or c == '_')
-    cmd = f"screen -r minecraft -p 0 -X stuff \"whitelist add {uname} $(printf '\r')\""
+    whitelist = f"whitelist add {uname}"
+    runMinecraftCommand(whitelist)
+
+import os
+def runMinecraftCommand(cmd):
+    cmd = f"screen -r minecraft -p 0 -X stuff \"{cmd}$(printf '\r')\""
     result = os.system(cmd)
+    return result
