@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+
+{% block content %}
+    <form action="/login" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {% for error in form.age.errors %}
+            <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+            {{ form.age.label }}<br>
+            {{ form.age(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
